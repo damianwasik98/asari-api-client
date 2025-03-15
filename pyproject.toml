@@ -6,8 +6,13 @@ readme = "README.md"
 authors = [
     { name = "Damian Wąsik", email = "damianwasik98@gmail.com" }
 ]
+authors = [{ name = "Damian Wąsik", email = "damianwasik98@gmail.com" }]
 requires-python = ">=3.12"
 dependencies = []
+    "requests>=2.32.3",
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/asari"]
 
 [build-system]
 requires = ["hatchling"]
