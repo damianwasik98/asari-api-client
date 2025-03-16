@@ -3,13 +3,11 @@ name = "asari-api-client"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-authors = [
-    { name = "Damian Wąsik", email = "damianwasik98@gmail.com" }
-]
 authors = [{ name = "Damian Wąsik", email = "damianwasik98@gmail.com" }]
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
     "requests>=2.32.3",
+]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/asari"]

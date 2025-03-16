@@ -1,2 +1,1 @@
-def hello() -> str:
-    return "Hello from asari-api-client!"
+from asari.client import AsariAPI
