@@ -1,7 +1,7 @@
 [project]
 name = "asari-api-client"
 version = "1.0.0"
-description = "Add your description here"
+description = "API client for Asari CRM"
 readme = "README.md"
 authors = [{ name = "Damian Wąsik", email = "damianwasik98@gmail.com" }]
 requires-python = ">=3.12"
