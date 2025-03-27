@@ -15,7 +15,6 @@ class AsariAPI:
     ) -> dict:
         url: str = f"{consts.BASE_URL}/api/apiLocation/findLocations"
         params: dict = {
-            "_dc": 1741980238488,
             "query": name,
             "page": page,
             "start": start,
@@ -47,7 +46,6 @@ class AsariAPI:
         phone_description: str | None = None,
     ) -> dict:
         url = f"{consts.BASE_URL}/api/apiCustomer/create"
-        params: dict = {"_dc": "1741980164831"}
         payload: dict = {
             "id": "",
             "firstName": first_name or "",
@@ -89,7 +87,6 @@ class AsariAPI:
         }
         response: Response = requests.post(
             url=url,
-            params=params,
             data=payload,
             headers=consts.HEADERS | headers,
             cookies=self._cookies,
@@ -131,7 +128,7 @@ class AsariAPI:
             "id": "",
             "listingFilter.locations": str(location_id),
             "listingFilter.locationsExcepted": "",
-            "process.id": "7212",  # TODO: co to jest?
+            "process.id": "",
             "listingFilter.mortgageMarket": "",
             "listingFilter.totalAreaMin": area_min or "",
             "listingFilter.totalAreaMax": area_max or "",
