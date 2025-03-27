@@ -1,13 +1,11 @@
 [project]
 name = "asari-api-client"
-version = "0.1.0"
+version = "1.0.0"
 description = "Add your description here"
 readme = "README.md"
 authors = [{ name = "Damian Wąsik", email = "damianwasik98@gmail.com" }]
 requires-python = ">=3.12"
-dependencies = [
-    "requests>=2.32.3",
-]
+dependencies = ["requests>=2.32.3"]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/asari"]
@@ -17,8 +15,4 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [dependency-groups]
-dev = [
-    "ipython>=9.0.2",
-    "pytest>=8.3.5",
-    "pytest-sugar>=1.0.0",
-]
+dev = ["ipython>=9.0.2", "pytest>=8.3.5", "pytest-sugar>=1.0.0"]
