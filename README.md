@@ -12,7 +12,7 @@ pip install asari-api-client
 
 ## Tests
 
-There are only integration tests for authentication do crm.
+There are only integration tests for authentication to crm.
 To run them you need to use your account (because I don't have dedicated account for testing).
 Before running tests export asari credentials as env variables [checkout which variables in the test file](./tests/integration/test_authenticate.py)
 
