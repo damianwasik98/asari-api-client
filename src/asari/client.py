@@ -1,44 +1,19 @@
 import requests
 from requests import Response
 
-HEADERS: dict[str, str] = {
-    "accept-language": "pl-PL,pl;q=0.9",
-    "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.1 Mobile/15E148 Safari/604.1",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "same-origin",
-    "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
-}
+from asari import consts
+from asari.auth import authenticate
 
 
 class AsariAPI:
-    BASE_URL: str = "https://k2.asari.pro"
-
     def __init__(self, email: str, password: str) -> None:
-        self._session_id: str = self.authenticate(email, password)
+        self._session_id: str = authenticate(email, password)
         self._cookies: dict[str, str] = {"JSESSIONID": self._session_id}
-
-    def authenticate(self, email: str, password: str) -> str:
-        url: str = f"{self.BASE_URL}/login/authenticate"
-        payload: str = f"email={email}&password={password}"
-
-        headers: dict[str, str] = {
-            "origin": "https://login.asari.pro",
-            "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-            "sec-fetch-site": "same-site",
-            "sec-fetch-mode": "navigate",
-            "sec-fetch-dest": "document",
-            "referer": "https://login.asari.pro/",
-        }
-        response: Response = requests.post(
-            url=url, data=payload, headers=HEADERS | headers
-        )
-        # TODO: handle non 302 response
-        return response.history[0].cookies["JSESSIONID"]
 
     def find_locations(
         self, name: str, page: int = 1, start: int = 0, limit: int = 25
     ) -> dict:
-        url: str = f"{self.BASE_URL}/api/apiLocation/findLocations"
+        url: str = f"{consts.BASE_URL}/api/apiLocation/findLocations"
         params: dict = {
             "_dc": 1741980238488,
             "query": name,
@@ -59,10 +34,9 @@ class AsariAPI:
         response: Response = requests.get(
             url=url,
             params=params,
-            headers=HEADERS | headers,
+            headers=consts.HEADERS | headers,
             cookies=self._cookies,
         )
-        # TODO: handle non 200 response
         return response.json()
 
     def create_contact(
@@ -72,7 +46,7 @@ class AsariAPI:
         phone_number: str | None = None,
         phone_description: str | None = None,
     ) -> dict:
-        url = f"{self.BASE_URL}/api/apiCustomer/create"
+        url = f"{consts.BASE_URL}/api/apiCustomer/create"
         params: dict = {"_dc": "1741980164831"}
         payload: dict = {
             "id": "",
@@ -117,7 +91,7 @@ class AsariAPI:
             url=url,
             params=params,
             data=payload,
-            headers=HEADERS | headers,
+            headers=consts.HEADERS | headers,
             cookies=self._cookies,
         )
         return response.json()
@@ -141,7 +115,7 @@ class AsariAPI:
         year_built_min: int | None = None,
         year_built_max: int | None = None,
     ) -> dict:
-        url: str = f"{self.BASE_URL}/api/apiSeeker/create"
+        url: str = f"{consts.BASE_URL}/api/apiSeeker/create"
 
         headers: dict[str, str] = {
             "accept": "application/json",
@@ -190,6 +164,9 @@ class AsariAPI:
         }
 
         response = requests.post(
-            url=url, data=payload, headers=HEADERS | headers, cookies=self._cookies
+            url=url,
+            data=payload,
+            headers=consts.HEADERS | headers,
+            cookies=self._cookies,
         )
         return response.json()
